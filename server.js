@@ -30,7 +30,7 @@ app.use((err, req, res, next) => {
 });
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://23bme025:XIWdxagf3YYcW6B5@cluster0.fdwyy1v.mongodb.net/', {
+mongoose.connect('mongodb+srv://agencyashishatharv_db_user:F7yGHLzTxdf6jqQm@idcarddata.pqghrbn.mongodb.net/?retryWrites=true&w=majority&appName=IDCardData', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -42,8 +42,11 @@ mongoose.connect('mongodb+srv://23bme025:XIWdxagf3YYcW6B5@cluster0.fdwyy1v.mongo
 });
 
 
+
 // Routes
 app.use('/api/transactions', transactionRoutes);
+const cardRoutes = require('./routes/cards');
+app.use('/api/cards', cardRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

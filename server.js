@@ -11,7 +11,13 @@ mongoose.set('strictQuery', false);
 // Middleware
 app.use(cors(
     {
-        origin: ['http://localhost:8080', 'https://pixelflow-landing.vercel.app'],
+        origin: [
+            'http://localhost:8080', 
+            'http://localhost:3000', 
+            'http://localhost:3001', 
+            'http://localhost:3002', 
+            'https://pixelflow-landing.vercel.app'
+        ],
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true
     }

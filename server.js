@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+require('dotenv').config();
 const transactionRoutes = require('./routes/transactions');
 
 const app = express();
@@ -16,7 +17,8 @@ app.use(cors(
             'http://localhost:3000', 
             'http://localhost:3001', 
             'http://localhost:3002', 
-            'https://pixelflow-landing.vercel.app'
+            'https://pixelflow-landing.vercel.app',
+            'https://pixelflow-landing-vmqm.vercel.app'
         ],
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true
@@ -53,6 +55,8 @@ mongoose.connect('mongodb+srv://agencyashishatharv_db_user:F7yGHLzTxdf6jqQm@idca
 app.use('/api/transactions', transactionRoutes);
 const cardRoutes = require('./routes/cards');
 app.use('/api/cards', cardRoutes);
+const paymentRoutes = require('./routes/payments');
+app.use('/api/payments', paymentRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

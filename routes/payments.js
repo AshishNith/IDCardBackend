@@ -4,9 +4,15 @@ const {
   createOrder,
   verifyPayment,
   getPaymentDetails,
-  refundPayment
+  refundPayment,
+  // Test endpoints
+  testRazorpayConfig,
+  createDummyOrder,
+  verifyDummyPayment,
+  testWalletOperations
 } = require('../controllers/paymentController');
 
+// Production endpoints
 // POST /api/payments/create-order - Create Razorpay order
 router.post('/create-order', createOrder);
 
@@ -18,5 +24,18 @@ router.get('/:paymentId', getPaymentDetails);
 
 // POST /api/payments/refund - Process refund
 router.post('/refund', refundPayment);
+
+// Test endpoints
+// GET /api/payments/test/config - Test Razorpay configuration
+router.get('/test/config', testRazorpayConfig);
+
+// POST /api/payments/test/create-dummy-order - Create dummy order for testing
+router.post('/test/create-dummy-order', createDummyOrder);
+
+// POST /api/payments/test/verify-dummy - Verify dummy payment
+router.post('/test/verify-dummy', verifyDummyPayment);
+
+// POST /api/payments/test/wallet - Test wallet operations
+router.post('/test/wallet', testWalletOperations);
 
 module.exports = router;

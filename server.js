@@ -57,6 +57,8 @@ const cardRoutes = require('./routes/cards');
 app.use('/api/cards', cardRoutes);
 const paymentRoutes = require('./routes/payments');
 app.use('/api/payments', paymentRoutes);
+const walletRoutes = require('./routes/wallet');
+app.use('/api/wallet', walletRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

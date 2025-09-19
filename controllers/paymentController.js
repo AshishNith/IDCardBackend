@@ -527,11 +527,38 @@ const refundPayment = async (req, res) => {
   }
 };
 
+// Get payments by user UID
+const getUserPayments = async (req, res) => {
+  try {
+    const { uid } = req.params;
+    
+    // Find all wallet transactions for the user that are payments/recharges
+    const payments = await Transaction.find({ 
+      uid: uid, 
+      type: { $in: ['WALLET_RECHARGE', 'RECHARGE'] }
+    }).sort({ date: -1 });
+    
+    res.status(200).json({
+      success: true,
+      payments: payments
+    });
+    
+  } catch (error) {
+    console.error('Error fetching user payments:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch user payments',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   createOrder,
   verifyPayment,
   getPaymentDetails,
   refundPayment,
+  getUserPayments, // Add the new function
   // Test endpoints
   testRazorpayConfig,
   createDummyOrder,

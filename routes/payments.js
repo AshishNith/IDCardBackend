@@ -5,6 +5,7 @@ const {
   verifyPayment,
   getPaymentDetails,
   refundPayment,
+  getUserPayments, // Add the new import
   // Test endpoints
   testRazorpayConfig,
   createDummyOrder,
@@ -21,6 +22,9 @@ router.post('/verify', verifyPayment);
 
 // GET /api/payments/:paymentId - Get payment details
 router.get('/:paymentId', getPaymentDetails);
+
+// GET /api/payments/user/:uid - Get user payments
+router.get('/user/:uid', getUserPayments);
 
 // POST /api/payments/refund - Process refund
 router.post('/refund', refundPayment);

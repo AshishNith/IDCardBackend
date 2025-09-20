@@ -5,8 +5,12 @@ const {
   addMoneyToWallet,
   deductMoneyFromWallet,
   getTransactionHistory,
-  getWalletStats
+  getWalletStats,
+  getAllWallets
 } = require('../controllers/walletController');
+
+// GET /api/wallet/all - Get all wallets (admin)
+router.get('/all', getAllWallets);
 
 // GET /api/wallet/:userId/balance - Get wallet balance
 router.get('/:userId/balance', getWalletBalance);

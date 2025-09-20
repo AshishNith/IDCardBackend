@@ -340,10 +340,47 @@ const getWalletStats = async (req, res) => {
   }
 };
 
+// Get all wallets for admin (NEW FUNCTION)
+const getAllWallets = async (req, res) => {
+  try {
+    const wallets = await Wallet.find({})
+      .sort({ createdAt: -1 })
+      .select('userId balance currency isActive lastTransactionAt createdAt updatedAt');
+
+    const walletsWithStats = wallets.map(wallet => ({
+      _id: wallet._id,
+      userId: wallet.userId,
+      balance: wallet.balance,
+      currency: wallet.currency,
+      formattedBalance: `₹${wallet.balance.toFixed(2)}`,
+      isActive: wallet.isActive,
+      lastTransactionAt: wallet.lastTransactionAt,
+      createdAt: wallet.createdAt,
+      updatedAt: wallet.updatedAt
+    }));
+
+    res.status(200).json({
+      success: true,
+      wallets: walletsWithStats,
+      total: walletsWithStats.length,
+      totalBalance: walletsWithStats.reduce((sum, wallet) => sum + wallet.balance, 0)
+    });
+
+  } catch (error) {
+    console.error('Error getting all wallets:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get wallets',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   getWalletBalance,
   addMoneyToWallet,
   deductMoneyFromWallet,
   getTransactionHistory,
-  getWalletStats
+  getWalletStats,
+  getAllWallets
 };

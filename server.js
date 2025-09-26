@@ -37,8 +37,8 @@ app.use((err, req, res, next) => {
   next();
 });
 
-// Connect to MongoDB
-mongoose.connect('mongodb+srv://agencyashishatharv_db_user:F7yGHLzTxdf6jqQm@idcarddata.pqghrbn.mongodb.net/?retryWrites=true&w=majority&appName=IDCardData', {
+// Connect to MongoDB -- >> Replace 'MONGODB_CONNECTION_STRING' with your actual connection string
+mongoose.connect('MONGODB_CONNECTION_STRING', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
